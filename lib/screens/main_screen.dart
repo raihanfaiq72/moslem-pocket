@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:moslem_pocket/constants/app_colors.dart';
-import 'package:moslem_pocket/screens/home_screen.dart';
-import 'package:moslem_pocket/screens/progress_screen.dart';
-import 'package:moslem_pocket/screens/profile_screen.dart';
-import 'package:moslem_pocket/screens/schedule_screen.dart';
+import 'package:moslem_pocket/modules/quran/screens/quran_dashboard_screen.dart';
+import 'package:moslem_pocket/modules/tracker/screens/tracker_screen.dart';
+import 'package:moslem_pocket/modules/settings/screens/profile_screen.dart';
+import 'package:moslem_pocket/modules/prayer_time/screens/prayer_time_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -16,9 +16,9 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    const HomeScreen(),
-    const ScheduleScreen(),
-    const ProgressScreen(),
+    const QuranDashboardScreen(),
+    const PrayerTimeScreen(),
+    const TrackerScreen(),
     const ProfileScreen(),
   ];
 
@@ -28,33 +28,52 @@ class _MainScreenState extends State<MainScreen> {
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
+          color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withValues(alpha: 0.2),
+              color: Colors.grey.withValues(alpha: 0.1),
               blurRadius: 10,
               offset: const Offset(0, -5),
             ),
           ],
         ),
-        child: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: AppColors.primary,
-          unselectedItemColor: Colors.grey,
-          showUnselectedLabels: true,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: "Schedule"),
-            BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: "Progress"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Me"),
-          ],
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildNavItem(0, Icons.home_filled),
+                _buildNavItem(1, Icons.calendar_today),
+                _buildNavItem(2, Icons.bar_chart), // Using bar chart as progress
+                _buildNavItem(3, Icons.person),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(int index, IconData icon) {
+    bool isSelected = _selectedIndex == index;
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: Container(
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.primary : Colors.transparent,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          icon,
+          color: isSelected ? Colors.white : Colors.grey,
+          size: 24,
         ),
       ),
     );

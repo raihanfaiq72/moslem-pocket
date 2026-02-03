@@ -9,6 +9,7 @@ void main() {
     await tester.pumpWidget(const MoslemPocketApp());
 
     // Verify that the splash screen shows the correct text.
-    expect(find.text("Starting To Live\nWith The Al-Qur'an"), findsOneWidget);
+    expect(find.text("Moslem Pocket"), findsOneWidget);
+    expect(find.text("Get Started"), findsOneWidget);
   });
 }

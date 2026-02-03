@@ -11,61 +11,79 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: AppColors.primary,
       body: Stack(
         children: [
+          // Background Gradient
           Container(
-             decoration: const BoxDecoration(
-               gradient: LinearGradient(
-                 begin: Alignment.topCenter,
-                 end: Alignment.bottomCenter,
-                 colors: [AppColors.primary, AppColors.primaryDark],
-               ),
-             ),
-           ),
-           // Decorative background image placeholder
-           Positioned.fill(
-             child: Opacity(
-               opacity: 0.1,
-               child: Image.network(
-                 "https://img.freepik.com/free-photo/open-quran-book_1409-3224.jpg",
-                 fit: BoxFit.cover,
-                 errorBuilder: (c, e, s) => Container(), // Fallback if offline
-               ),
-             ),
-           ),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [AppColors.primary, AppColors.primaryDark],
+              ),
+            ),
+          ),
+          
+          // Content
           Center(
             child: Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Spacer(flex: 3),
-                   const Text(
-                    "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
                   const Spacer(flex: 2),
+                  
+                  // App Title
                   const Text(
-                    "Starting To Live\nWith The Al-Qur'an",
-                    textAlign: TextAlign.center,
+                    "Moslem Pocket",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 28,
+                      fontSize: 32,
                       fontWeight: FontWeight.bold,
+                      letterSpacing: 1.5,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   const Text(
-                    "Rasulullah SAW Said: \"Whoever Reads One Letter From The Book Of Allah (The Koran), He Will Get One Goodness\".",
+                    "Learn Quran and Recite every day",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white70,
-                      fontSize: 14,
+                      fontSize: 16,
                     ),
                   ),
+                  
                   const Spacer(flex: 1),
+                  
+                  // Illustration Placeholder (Book/Quran)
+                  Container(
+                    width: 200,
+                    height: 250,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Icon(Icons.menu_book_rounded, size: 100, color: Colors.white.withValues(alpha: 0.9)),
+                        // Decorative elements
+                        Positioned(
+                          top: 20,
+                          right: 20,
+                          child: Icon(Icons.star, size: 20, color: AppColors.accent),
+                        ),
+                        Positioned(
+                          bottom: 40,
+                          left: 30,
+                          child: Icon(Icons.star, size: 15, color: AppColors.accent.withValues(alpha: 0.7)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  
+                  const Spacer(flex: 2),
+                  
+                  // Get Started Button
                   SizedBox(
                     width: double.infinity,
                     height: 55,
@@ -77,51 +95,23 @@ class SplashScreen extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryDark,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          side: const BorderSide(color: Colors.white30)
-                        ),
-                        elevation: 0,
-                      ),
-                      child: const Text(
-                        "Read Direct",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                   SizedBox(
-                    width: double.infinity,
-                    height: 55,
-                    child: ElevatedButton(
-                      onPressed: () {
-                         Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => const MainScreen()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: AppColors.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
+                        backgroundColor: AppColors.accent,
+                        foregroundColor: AppColors.primaryDark,
                         elevation: 5,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
                       ),
                       child: const Text(
-                        "Login",
+                        "Get Started",
                         style: TextStyle(
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
                         ),
                       ),
                     ),
                   ),
+                  
                   const SizedBox(height: 50),
                 ],
               ),

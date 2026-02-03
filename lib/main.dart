@@ -14,7 +14,14 @@ class MoslemPocketApp extends StatelessWidget {
     return MaterialApp(
       title: 'Moslem Pocket',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
+      theme: AppTheme.lightTheme.copyWith(
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          },
+        ),
+      ),
       home: const SplashScreen(),
     );
   }
